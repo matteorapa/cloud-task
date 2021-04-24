@@ -1,7 +1,7 @@
 runtime: nodejs14
 service: generation
-env_variables:
-  GENERATE_SETTINGS: 1000
-instance_class: B2
-manual_scaling:
-  instances: 10
+instance_class: F2
+automatic_scaling:
+  min_instances: 10
+  max_instances: 10
+  max_concurrent_requests: 1
