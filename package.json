@@ -1,0 +1,22 @@
+{
+  "name": "gcloud-task",
+  "version": "1.0.0",
+  "description": "Cloud Computing Assignment",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matteorapa/gcloud-task.git"
+  },
+  "author": "Matteo Rapa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matteorapa/gcloud-task/issues"
+  },
+  "homepage": "https://github.com/matteorapa/gcloud-task#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
