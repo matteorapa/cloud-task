@@ -28,7 +28,7 @@ app.get('/generate', (req, res) => {
         numbers.push(num)
     }
   res.status(200).json({
-      instance: 0,
+      instance: process.env.GAE_INSTANCE,
       largest: largest,
       smallest: smallest,
       numbers: numbers

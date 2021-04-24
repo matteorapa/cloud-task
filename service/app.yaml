@@ -5,4 +5,3 @@ env_variables:
 instance_class: B2
 manual_scaling:
   instances: 10
-  max_concurrent_requests: 1
