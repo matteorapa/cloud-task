@@ -4,9 +4,32 @@ const express = require('express');
 
 const app = express();
 
-//app.use(express.static("public"));
+const createPostgresClient = () => {
+  const Client = require('pg').Client
+  const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql'
+
+  return new Client({
+    // specifying connection parameters from env file
+    host: `${dbSocketPath}/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
+    user: process.env.DB_USER,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT
+  })
+}
+
+app.get('/insert_test', (req, res)=>{
+  obj = req.body;
+  const connection = createPostgresClient.connect();
+  connection.query('INSERT INTO generate (client_id, number, instance_id) VALUES (($1, $2, $3) )',
+  ["client_id_352737n537", 23553, "instance_id_34vh5m7nv3y4573"], (err, results) => {
+    if(err) res.status(400).end()
+  });
+  res.status(201).end();
+})
 
 app.get('/generate', (req, res) => {
+    
     // Each instance will generate 1,000 random numbers
     const amountToGenerate = 1000
 
