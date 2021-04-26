@@ -5,3 +5,4 @@ automatic_scaling:
   min_instances: 10
   max_instances: 10
   max_concurrent_requests: 1
+env: standard

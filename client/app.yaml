@@ -1,5 +1,6 @@
 runtime: nodejs14
 service: client
+env: standard
 instance_class: B2
 manual_scaling:
   instances: 1
