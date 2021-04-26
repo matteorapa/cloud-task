@@ -8,6 +8,11 @@
   margin: 0 auto;
 }
 
+code{
+  color: rgb(131, 162, 230);
+  font-size: 11;
+}
+
 .author{
 
   font-family: Verdana, sans-serif;
