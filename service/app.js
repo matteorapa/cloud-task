@@ -31,7 +31,7 @@ app.get('/insert_test', (req, res)=>{
 app.get('/generate', (req, res) => {
     
     // Each instance will generate 1,000 random numbers
-    const amountToGenerate = 1000
+    const amountToGenerate = 100
 
     // The maximum random number that can be generated is 100,000
     const max = 100000
