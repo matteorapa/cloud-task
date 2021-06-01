@@ -45,7 +45,7 @@ function App() {
         // console.log(data)
         if(callbacks_recieved == 10){
           // Request max and min generated numbers
-
+          console.log("revieved all callbacks")
           fetch("https://generation-dot-cis3111-cloud-computing-gae.ew.r.appspot.com/maxmin", {
             method: 'POST',
             headers: {
