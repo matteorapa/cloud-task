@@ -4,3 +4,5 @@ appengine-generated/
 
 /client/node_modules
 /service/node_modules
+
+.env
