@@ -10,13 +10,15 @@ app.use(
     extended: true,
   })
 )
-app.use(cors())
+app.use(cors({
+  origin: 'https://client-dot-cis3111-cloud-computing-gae.ew.r.appspot.com'
+}))
 
 const db = require('./queries')
 
 
 app.get('/', (request, response) => {
-  response.json({ info: 'Express API, and Postgres API' })
+  response.json({ info: 'Express API, running on GAE.' })
 })
 
 

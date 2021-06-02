@@ -9,12 +9,13 @@ function App() {
   const [client_id] = useState(nanoid())
   const [url] = useState("https://generation-dot-cis3111-cloud-computing-gae.ew.r.appspot.com")
 
-  const generateBatch = (cb) => {
+  const generateBatch = (cb, err) => {
 
     // fetch request to 10 instances concurrently for numbers (1k each)
     fetch(url +"/generate", {
       method: 'POST',
       headers: {
+          Origin: 'https://client-dot-cis3111-cloud-computing-gae.ew.r.appspot.com/',
           Accept: 'application/json',
           'Content-Type': 'application/json'
       },
@@ -31,42 +32,47 @@ function App() {
     })
     .catch(error => {
       console.warn(error)
+      err(true)
     })
   }
 
   const sendRequests = () => {
 
     let callbacks_recieved = 0
+    let calls = 10
 
-    for (let i = 0; i < 10; i++) {
-      generateBatch((data)=>{
-        callbacks_recieved++
-        if(callbacks_recieved === 10){
-          // Request max and min generated numbers
-          fetch(url +"/maxmin", {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                client_id: client_id
-            })
-          }).then( res => {
-            return res.json()
-          })
-          .then((data) => {
-            setSmallest(data.min)
-            setLargest(data.max)
-            setSmallestInstance(data.min_instance)
-            setLargestInstance(data.max_instance)
-          })
-          .catch(error => {
-            console.warn(error)
-          })
-        }
+    for (let i = 0; i < calls; i++) {
+      generateBatch((err, data)=>{
+        if(err){
+          if (calls < 20) calls++
+        } 
+        if(data) callbacks_recieved++
       })
     }
+
+    // Request max and min generated numbers
+    fetch(url +"/maxmin", {
+      method: 'POST',
+      headers: {
+          Origin: 'https://client-dot-cis3111-cloud-computing-gae.ew.r.appspot.com/',
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          client_id: client_id
+      })
+    }).then( res => {
+      return res.json()
+    })
+    .then((data) => {
+      setSmallest(data.min)
+      setLargest(data.max)
+      setSmallestInstance(data.min_instance)
+      setLargestInstance(data.max_instance)
+    })
+    .catch(error => {
+      console.warn(error)
+    })
   }
 
   return (

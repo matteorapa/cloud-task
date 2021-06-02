@@ -3,8 +3,8 @@ const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql'
 
 const pool = new Pool({
   user: process.env.DB_USER,
-  host: '34.76.139.69',
-  //host: `${dbSocketPath}/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
+  //host: '34.76.139.69',
+  host: `${dbSocketPath}/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
   database: process.env.DB_DATABASE,
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
